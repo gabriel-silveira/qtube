@@ -1,6 +1,8 @@
 import { reactive } from "vue";
 
 interface IQuizItem {
+  fontFamily: string,
+  backgroundColor: string,
   question: {
     value: string,
     size: number,

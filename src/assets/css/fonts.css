@@ -1,0 +1,19 @@
+@font-face {
+    font-family: Anonymous_Pro;
+    src: url('../fonts/Anonymous_Pro/AnonymousPro-Regular.ttf');
+}
+
+@font-face {
+    font-family: Calistoga;
+    src: url('../fonts/Calistoga/Calistoga-Regular.ttf');
+}
+
+@font-face {
+    font-family: Creepster;
+    src: url('../fonts/Creepster/Creepster-Regular.ttf');
+}
+
+@font-face {
+    font-family: Sniglet;
+    src: url('../fonts/Sniglet/Sniglet-Regular.ttf');
+}
