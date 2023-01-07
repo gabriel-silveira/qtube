@@ -4,7 +4,7 @@
     :style="quizStyle"
   >
     <one-word
-      v-if="quiz.activeItem.type === quizModels.ONE_WORD"
+      v-if="quiz.current.type === quizModels.ONE_WORD"
     />
   </div>
 </template>
@@ -19,8 +19,8 @@ import colors1 from "@/services/quiz/quizzes/colors-1";
 const quiz = new Quiz(colors1);
 
 const quizStyle = computed(() => ({
-  fontFamily: quiz.activeItem.fontFamily,
-  backgroundColor: quiz.activeItem.backgroundColor,
+  fontFamily: quiz.current.fontFamily,
+  backgroundColor: quiz.current.backgroundColor,
 }));
 
 onBeforeMount(() => {

@@ -7,10 +7,10 @@ export default [
     backgroundColor: '#BBCCEE',
     question: {
       value: 'CINZA',
-      size: 105,
+      size: 120,
       backgroundColor: '#666666',
     },
-    options: ['WHITE', 'BLACK', 'GREY'],
+    options: ['White', 'Black', 'Grey'],
     answer: 2,
   },
 ];

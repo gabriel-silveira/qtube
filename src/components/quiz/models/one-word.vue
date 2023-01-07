@@ -3,11 +3,7 @@
     <div
       id="question"
       class="d-flex justify-center align-center"
-      :style="{
-        fontSize: `${currentQuestion.question.size}px`,
-        backgroundColor: currentQuestion.question.backgroundColor,
-        color: getTextColor(currentQuestion.question.backgroundColor)
-      }"
+      :style="questionStyle"
     >
       {{ currentQuestion.question.value }}
     </div>
@@ -16,8 +12,8 @@
       <div
         v-for="(option, index) of currentQuestion.options"
         :key="`option-${index}`"
-        class="mx-10 mt-7 text-center rounded-lg"
-        :class="index === currentQuestion.answer ? 'answer' : ''"
+        :id="option"
+        class="d-inline-block text-center rounded-lg one-word"
       >
         {{ option }}
       </div>
@@ -30,13 +26,19 @@
 </template>
 
 <script setup lang="ts">
-import {getTextColor} from "@/services/Color";
 import {computed, inject, onMounted} from "vue";
+import {getTextColor} from "@/services/Color";
 import Quiz from "@/services/quiz";
 
 const quiz = inject('quiz') as Quiz;
 
-const currentQuestion = computed(() => quiz.activeItem);
+const currentQuestion = computed(() => quiz.current);
+
+const questionStyle = computed(() => ({
+  fontSize: `${currentQuestion.value.question.size}px`,
+  backgroundColor: currentQuestion.value.question.backgroundColor,
+  color: getTextColor(currentQuestion.value.question.backgroundColor)
+}));
 
 onMounted(() => {
   quiz.play();

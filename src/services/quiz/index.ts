@@ -3,10 +3,10 @@ import { IQuizItem } from "@/services/quiz/interfaces";
 
 class Quiz {
   data: {
-    active: number,
+    currentIndex: number,
     items: IQuizItem[],
   } = reactive({
-    active: 0,
+    currentIndex: 0,
     items: [],
   });
 
@@ -14,28 +14,41 @@ class Quiz {
     this.data.items = [...items];
   }
 
-  get activeItem() {
-    return this.data.items[this.data.active];
+  get current() {
+    return this.data.items[this.data.currentIndex];
   }
 
   play() {
     const timeBar = document.querySelector('#time-bar');
 
     if (timeBar) {
-      console.log(timeBar.classList);
       timeBar.classList.remove('animate');
 
       setTimeout(() => {
         timeBar.classList.add('animate');
-        console.log(timeBar.classList);
 
-        setTimeout(this.revealAnswer, 7000);
+        setTimeout(() => {
+          this.revealAnswer();
+        }, 7000);
       }, 500);
     }
   }
 
   revealAnswer() {
-    //
+    const { options } = this.current;
+
+    let i = 0;
+    for (const option of options) {
+      const item = document.querySelector(`#${option}`);
+
+      if (i === this.current.answer) {
+        item?.classList.add('right');
+      } else {
+        item?.classList.add('wrong');
+      }
+
+      i += 1;
+    }
   }
 
   stop() {
