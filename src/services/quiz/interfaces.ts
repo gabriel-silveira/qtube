@@ -1,4 +1,5 @@
 export interface IQuizItem {
+  type: quizModels,
   fontFamily: string,
   backgroundColor: string,
   question: {
@@ -8,4 +9,8 @@ export interface IQuizItem {
   },
   options: string[],
   answer: number,
+}
+
+export enum quizModels {
+  ONE_WORD,
 }

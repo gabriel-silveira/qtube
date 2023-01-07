@@ -19,6 +19,22 @@ class Quiz {
   }
 
   play() {
+    const timeBar = document.querySelector('#time-bar');
+
+    if (timeBar) {
+      console.log(timeBar.classList);
+      timeBar.classList.remove('animate');
+
+      setTimeout(() => {
+        timeBar.classList.add('animate');
+        console.log(timeBar.classList);
+
+        setTimeout(this.revealAnswer, 7000);
+      }, 500);
+    }
+  }
+
+  revealAnswer() {
     //
   }
 
