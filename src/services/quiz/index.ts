@@ -1,16 +1,5 @@
 import { reactive } from "vue";
-
-interface IQuizItem {
-  fontFamily: string,
-  backgroundColor: string,
-  question: {
-    value: string,
-    size: number,
-    backgroundColor: string,
-  },
-  options: string[],
-  answer: number,
-}
+import { IQuizItem } from "@/services/quiz/interfaces";
 
 class Quiz {
   data: {
