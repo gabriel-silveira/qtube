@@ -19,31 +19,33 @@
       <div
         v-for="(option, index) of quiz.activeItem.options"
         :key="`option-${index}`"
-        class="mx-5 mt-5 text-center rounded-lg"
+        class="mx-10 mt-7 text-center rounded-lg"
       >
         {{ option }}
       </div>
     </div>
 
-    <div id="progress" />
+    <div id="progress">
+      <div id="bar" />
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { computed } from "vue";
-import Quiz from "@/services/Quiz";
+import Quiz from "@/services/quiz";
 import { getTextColor } from "@/services/Color";
 
 const quiz = new Quiz([{
   fontFamily: 'Sniglet',
-  backgroundColor: '#004466',
+  backgroundColor: '#BBCCEE',
   question: {
     value: 'CINZA',
-    size: 100,
+    size: 105,
     backgroundColor: '#666666',
   },
   options: ['ORANGE', 'RED', 'GREY'],
-  answer: 0,
+  answer: 2,
 }]);
 
 const quizStyle = computed(() => ({
