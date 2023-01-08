@@ -14,6 +14,11 @@
 }
 
 @font-face {
+    font-family: RobotoBold;
+    src: url('../fonts/Roboto/Roboto-Bold.ttf');
+}
+
+@font-face {
     font-family: Sniglet;
     src: url('../fonts/Sniglet/Sniglet-Regular.ttf');
 }

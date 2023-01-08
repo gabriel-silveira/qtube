@@ -1,27 +1,26 @@
 <template>
   <div
     id="quiz"
-    :style="quizStyle"
+    :style="quiz.style"
   >
-    <one-word
-      v-if="quiz.current.type === quizModels.ONE_WORD"
+    <words
+      v-if="quiz.current.type === quizModels.WORDS"
     />
   </div>
 </template>
 
 <script setup lang="ts">
-import {computed, onBeforeMount, provide} from "vue";
+import {onBeforeMount, provide} from "vue";
+
+// services
 import Quiz from "@/services/quiz";
-import OneWord from "@/components/quiz/models/one-word.vue";
 import { quizModels } from "@/services/quiz/interfaces";
-import colors1 from "@/services/quiz/quizzes/colors-1";
+import colors1 from "@/services/quiz/quizzes/colors1";
+
+// components
+import Words from "@/components/quiz/models/Words.vue";
 
 const quiz = new Quiz(colors1);
-
-const quizStyle = computed(() => ({
-  fontFamily: quiz.current.fontFamily,
-  backgroundColor: quiz.current.backgroundColor,
-}));
 
 onBeforeMount(() => {
   provide('quiz', quiz);
