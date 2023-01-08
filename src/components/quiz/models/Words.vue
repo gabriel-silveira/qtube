@@ -12,10 +12,10 @@
     <div id="options" class="text-center">
       <div
         v-for="(option, index) of quiz.current.options"
+        v-html="option"
         :key="`option-${index}`"
         :id="option"
         class="d-inline-block text-center rounded-lg one-word"
-        v-html="option"
       />
     </div>
 
@@ -46,6 +46,6 @@ const questionStyle = computed(() => ({
 }));
 
 onMounted(() => {
-  quiz.play();
+  quiz.prepare().play();
 });
 </script>

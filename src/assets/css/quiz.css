@@ -46,7 +46,7 @@ html, body {
 }
 
 #quiz #options > div.one-word.wrong {
-  opacity: 0;
+  opacity: 0.3;
   transform: scale(0.95);
 
   transition: all ease-in 0.5s;

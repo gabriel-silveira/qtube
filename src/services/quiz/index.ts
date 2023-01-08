@@ -20,6 +20,13 @@ class Quiz {
     this.sound = new Sound(false);
   }
 
+  prepare() {
+    this.timeBar = document.querySelector('#time-bar');
+    this.conclusion = document.querySelector('#conclusion');
+
+    return this;
+  }
+
   get style() {
     return {
       fontFamily: this.current.fontFamily,
@@ -32,9 +39,6 @@ class Quiz {
   }
 
   play() {
-    this.timeBar = document.querySelector('#time-bar');
-    this.conclusion = document.querySelector('#conclusion');
-
     const { timeBar } = this;
 
     if (timeBar) {
@@ -53,33 +57,21 @@ class Quiz {
   revealAnswer() {
     const { options } = this.current;
 
-    const wrongItems: Element[] = [];
-
     let i = 0;
     for (const option of options) {
       const item = document.querySelector(`#${option}`);
 
       if (item) {
         if (i === this.current.answer) {
+          item.classList.add('right');
+
+          this.sound.select();
+
           setTimeout(() => {
-            // remove wrong items
-            for (const wrongItem of wrongItems) {
-              wrongItem.remove();
-            }
-
-            // highlight right answer
-            item.classList.add('right');
-
-            this.sound.select();
-
-            setTimeout(() => {
-              this.openQuestionConclusion();
-            }, 5000);
-          }, 550);
+            this.openQuestionConclusion();
+          }, 5000);
         } else {
           item.classList.add('wrong');
-
-          wrongItems.push(item);
         }
       }
 
@@ -92,11 +84,37 @@ class Quiz {
       this.sound.whoosh();
 
       this.conclusion.classList.add('open');
+
+      setTimeout(() => {
+        this.next();
+      }, 8000);
     }
   }
 
-  stop() {
-    //
+  next() {
+    if (this.timeBar) this.timeBar.classList.remove('animate');
+
+    const { options } = this.current;
+
+    let i = 0;
+    for (const option of options) {
+      const item = document.querySelector(`#${option}`);
+
+      if (item) {
+        console.log({ ...item.classList });
+        if (i === this.current.answer) {
+          item.classList.remove('right');
+        } else {
+          item.classList.remove('wrong');
+        }
+
+        i += 1;
+      }
+    }
+
+    if (this.conclusion) this.conclusion.classList.remove('open');
+
+    this.play();
   }
 
   restart() {
