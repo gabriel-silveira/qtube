@@ -13,11 +13,13 @@ class Quiz {
 
   sound: Sound;
   timeBar: Element | null = null;
+  timerDuration = 8000;
   conclusion: Element | null = null;
 
   constructor(items: IQuizItem[]) {
     this.data.items = [...items];
-    this.sound = new Sound(false);
+
+    this.sound = new Sound(this, false);
   }
 
   prepare() {
@@ -42,6 +44,8 @@ class Quiz {
     const { timeBar } = this;
 
     if (timeBar) {
+      this.sound.timer();
+
       timeBar.classList.remove('animate');
 
       setTimeout(() => {
@@ -49,7 +53,7 @@ class Quiz {
 
         setTimeout(() => {
           this.revealAnswer();
-        }, 7000);
+        }, this.timerDuration);
       }, 500);
     }
   }
@@ -87,7 +91,7 @@ class Quiz {
 
       setTimeout(() => {
         this.next();
-      }, 8000);
+      }, this.timerDuration);
     }
   }
 
@@ -101,7 +105,6 @@ class Quiz {
       const item = document.querySelector(`#${option}`);
 
       if (item) {
-        console.log({ ...item.classList });
         if (i === this.current.answer) {
           item.classList.remove('right');
         } else {
@@ -113,6 +116,12 @@ class Quiz {
     }
 
     if (this.conclusion) this.conclusion.classList.remove('open');
+
+    if (this.data.items.length !== this.data.currentIndex + 1) {
+      this.data.currentIndex += 1;
+    } else {
+      this.data.currentIndex = 0;
+    }
 
     this.play();
   }

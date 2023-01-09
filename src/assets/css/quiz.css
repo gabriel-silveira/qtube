@@ -62,7 +62,8 @@ html, body {
 #quiz #progress #time-bar {
   width: 0;
   height: 100%;
-  background-color: #0B2;
+  background-color: #0D2;
+  box-shadow: 0 -10px 10px rgba(255, 255, 255, 0.2);
 
   transition: none;
 }
@@ -70,7 +71,7 @@ html, body {
 #quiz #progress #time-bar.animate {
   width: 100%;
 
-  transition: width linear 7s;
+  transition: width linear 8s;
 }
 
 #quiz #conclusion {

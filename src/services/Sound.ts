@@ -1,13 +1,17 @@
+import Quiz from "@/services/quiz";
+
 class Sound {
+  quiz: Quiz;
   readonly mute: boolean;
   bodyElement: HTMLBodyElement | null;
 
-  constructor(muted: boolean) {
+  constructor(quiz: Quiz, muted: boolean) {
+    this.quiz = quiz;
     this.mute = muted;
     this.bodyElement = document.querySelector('body');
   }
 
-  play(url: string, removeAfter = 2000) {
+  play(url: string, removeAfter = 2000, loop = false) {
     if (this.mute) {
       console.warn('Sound is muted.');
       return;
@@ -24,6 +28,7 @@ class Sound {
       );
 
       embeddedSound.setAttribute('autoplay', 'true');
+      if (loop) embeddedSound.setAttribute('loop', 'true');
 
       body.appendChild(embeddedSound);
 
@@ -31,6 +36,14 @@ class Sound {
         embeddedSound.remove();
       }, removeAfter);
     }
+  }
+
+  timer() {
+    this.play(
+      'sounds/clock.mp3',
+      this.quiz.timerDuration + 500,
+      true,
+    );
   }
 
   select() {
